@@ -1,8 +1,9 @@
 // src/components/RegistrationForm.js
 import React, { useState, useEffect } from 'react';
 import { validateRegistrationForm, calculateAge } from '../utils/validation';
-import Toaster from '../components/Toaster';
 import './RegistrationForm.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -56,9 +57,9 @@ const RegistrationForm = () => {
         onChange={handleInputChange}
         placeholder="First Name"
       />
-      {errors.firstName && (
+      {/* {errors.firstName && (
         <div className="error-message">{errors.firstName}</div>
-      )}
+      )} */}
 
       <input
         type="text"
@@ -67,9 +68,9 @@ const RegistrationForm = () => {
         onChange={handleInputChange}
         placeholder="Last Name"
       />
-      {errors.lastName && (
+      {/* {errors.lastName && (
         <div className="error-message">{errors.lastName}</div>
-      )}
+      )} */}
 
       <input
         type="text"
@@ -78,7 +79,7 @@ const RegistrationForm = () => {
         onChange={handleInputChange}
         placeholder="Email"
       />
-      {errors.email && <div className="error-message">{errors.email}</div>}
+      {/* {errors.email && <div className="error-message">{errors.email}</div>} */}
 
       <input
         type="date"
@@ -87,9 +88,9 @@ const RegistrationForm = () => {
         onChange={handleInputChange}
         placeholder="Date of Birth"
       />
-      {errors.dateOfBirth && (
+      {/* {errors.dateOfBirth && (
         <div className="error-message">{errors.dateOfBirth}</div>
-      )}
+      )} */}
 
       <input
         type="text"
@@ -106,14 +107,13 @@ const RegistrationForm = () => {
         onChange={handleInputChange}
         placeholder="Postal Code"
       />
-      {errors.postalCode && (
+      {/* {errors.postalCode && (
         <div className="error-message">{errors.postalCode}</div>
-      )}
+      )} */}
 
       <button onClick={handleSubmit} disabled={isButtonDisabled}>
         Save
       </button>
-      <Toaster errors={errors} />
     </div>
   );
 };
