@@ -49,7 +49,7 @@ const RegistrationForm = () => {
   }, [formData]);
 
   return (
-    <div className="registration-form">
+    <div data-testid="registration-form-component" className="registration-form">
       <input
         type="text"
         name="firstName"
@@ -111,7 +111,7 @@ const RegistrationForm = () => {
         <div className="error-message">{errors.postalCode}</div>
       )} */}
 
-      <button onClick={handleSubmit} disabled={isButtonDisabled}>
+      <button className='button' onClick={handleSubmit} disabled={isButtonDisabled}>
         Save
       </button>
     </div>
