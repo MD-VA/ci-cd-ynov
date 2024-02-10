@@ -42,7 +42,6 @@ describe('App Component Tests', () => {
   test('Renders the ToastContainer component', () => {
     render(<App />);
     const toastContainerElement = screen.queryByText('ToastContainer');
-
   });
 });
 

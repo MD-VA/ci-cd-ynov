@@ -60,9 +60,6 @@ const RegistrationForm = () => {
         onChange={handleInputChange}
         placeholder='First Name'
       />
-      {/* {errors.firstName && (
-        <div className="error-message">{errors.firstName}</div>
-      )} */}
 
       <input
         type='text'
