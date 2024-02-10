@@ -105,4 +105,20 @@ describe('Validation Functions Tests', () => {
     expect(validationResult.isValid).toBe(true);
     expect(validationResult.errors).toEqual({});
   });
+
+  // test('validateRegistrationForm returns the correct validation result when the city is a number', () => {
+  //   const formData = {
+  //     firstName: 'John',
+  //     lastName: 'Doe',
+  //     email: 'john.doe@example.com',
+  //     dateOfBirth: '1990-01-01',
+  //     city: '123', // City is a number
+  //     postalCode: '10001',
+  //   };
+  //   const validationResult = validateRegistrationForm(formData);
+  //   expect(validationResult.isValid).toBe(false);
+  //   expect(validationResult.errors).toEqual({
+  //     city: 'City should not be a number',
+  //   });
+  // });
 });

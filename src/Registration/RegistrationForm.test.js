@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import RegistrationForm from './RegistrationForm';
-import { validateRegistrationForm } from '../utils/validation';
 import '@testing-library/jest-dom/extend-expect';
 
 describe('RegistrationForm Integration Tests', () => {
@@ -126,13 +125,6 @@ test('Displays error toaster and corresponding errors in red', async  () => {
   expect(screen.getByText('City should not be a number')).toBeInTheDocument();
   expect(screen.getByText('Invalid postal code')).toBeInTheDocument();
 
-  // // Check if error messages are in red
-  // expect(screen.getByText('Invalid first name').style.color).toBe('red');
-  // expect(screen.getByText('Invalid last name').style.color).toBe('red');
-  // expect(screen.getByText('Invalid email address').style.color).toBe('red');
-  // expect(screen.getByText('Must be at least 18 years old').style.color).toBe('red');
-  // expect(screen.getByText('City is required').style.color).toBe('red');
-  // expect(screen.getByText('Invalid postal code').style.color).toBe('red');
 });
 
 });
