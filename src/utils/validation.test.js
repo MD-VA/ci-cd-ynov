@@ -1,6 +1,5 @@
 // validation.test.js
-import { calculateAge, validateRegistrationForm } from '../utils/validation';
-import { displayErrorToast } from '../utils/validation'; // Export this function from validation.js
+import { calculateAge, validateRegistrationForm, displayErrorToast } from '../utils/validation';
 
 // Mocking the toast.error function
 jest.mock('react-toastify', () => ({
@@ -19,21 +18,21 @@ describe('Validation Functions Tests', () => {
   });
 
   // Test displayErrorToast function
-//   test('displayErrorToast calls toast.error with the correct parameters', () => {
-//     const errorMessage = 'Test error message';
-//     displayErrorToast(errorMessage);
-//     expect(require('react-toastify').toast.error).toHaveBeenCalledWith(errorMessage, {
-//       position: 'top-right',
-//       autoClose: 3000,
-//       hideProgressBar: false,
-//       closeOnClick: true,
-//       pauseOnHover: true,
-//       draggable: true,
-//       progress: undefined,
-//     });
-//   });
+  test('displayErrorToast calls toast.error with the correct parameters', () => {
+    const errorMessage = 'Test error message';
+    displayErrorToast(errorMessage);
+    expect(require('react-toastify').toast.error).toHaveBeenCalledWith(errorMessage, {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  });
 
-  // Test validateRegistrationForm function
+  // Test validateRegistrationForm function - Valid data
   test('validateRegistrationForm returns the correct validation result for valid data', () => {
     const formData = {
       firstName: 'John',
@@ -48,7 +47,7 @@ describe('Validation Functions Tests', () => {
     expect(validationResult.errors).toEqual({});
   });
 
-  // Test validateRegistrationForm function with invalid data
+  // Test validateRegistrationForm function - Invalid data
   test('validateRegistrationForm returns the correct validation result for invalid data', () => {
     const formData = {
       firstName: '',
@@ -68,5 +67,42 @@ describe('Validation Functions Tests', () => {
       city: 'City is required',
       postalCode: 'Invalid postal code',
     });
+  });
+
+  // Additional test for validateRegistrationForm function - Edge case: Empty data
+  test('validateRegistrationForm returns the correct validation result for empty data', () => {
+    const formData = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      dateOfBirth: '',
+      city: '',
+      postalCode: '',
+    };
+    const validationResult = validateRegistrationForm(formData);
+    console.log("[ValidationResut]", validationResult)
+    expect(validationResult.isValid).toBe(false);
+    expect(validationResult.errors).toEqual({
+        firstName: 'Invalid first name',
+        lastName: 'Invalid last name',
+        email: 'Invalid email address',
+        city: 'City is required',
+        postalCode: 'Invalid postal code'
+    });
+  });
+
+  // Additional test for validateRegistrationForm function - Edge case: Valid city with leading/trailing spaces
+  test('validateRegistrationForm returns the correct validation result for a valid city with leading/trailing spaces', () => {
+    const formData = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@example.com',
+      dateOfBirth: '1990-01-01',
+      city: '  New York  ',
+      postalCode: '10001',
+    };
+    const validationResult = validateRegistrationForm(formData);
+    expect(validationResult.isValid).toBe(true);
+    expect(validationResult.errors).toEqual({});
   });
 });

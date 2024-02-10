@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { validateRegistrationForm, calculateAge } from '../utils/validation';
 import './RegistrationForm.scss';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -49,71 +49,69 @@ const RegistrationForm = () => {
   }, [formData]);
 
   return (
-    <div data-testid="registration-form-component" className="registration-form">
+    <div
+      data-testid='registration-form-component'
+      className='registration-form'
+    >
       <input
-        type="text"
-        name="firstName"
+        type='text'
+        name='firstName'
         value={formData.firstName}
         onChange={handleInputChange}
-        placeholder="First Name"
+        placeholder='First Name'
       />
       {/* {errors.firstName && (
         <div className="error-message">{errors.firstName}</div>
       )} */}
 
       <input
-        type="text"
-        name="lastName"
+        type='text'
+        name='lastName'
         value={formData.lastName}
         onChange={handleInputChange}
-        placeholder="Last Name"
+        placeholder='Last Name'
       />
-      {/* {errors.lastName && (
-        <div className="error-message">{errors.lastName}</div>
-      )} */}
 
       <input
-        type="text"
-        name="email"
+        type='text'
+        name='email'
         value={formData.email}
         onChange={handleInputChange}
-        placeholder="Email"
+        placeholder='Email'
       />
-      {/* {errors.email && <div className="error-message">{errors.email}</div>} */}
 
       <input
-        type="date"
-        name="dateOfBirth"
+        type='date'
+        name='dateOfBirth'
         value={formData.dateOfBirth}
         onChange={handleInputChange}
-        placeholder="Date of Birth"
+        placeholder='Date of Birth'
       />
-      {/* {errors.dateOfBirth && (
-        <div className="error-message">{errors.dateOfBirth}</div>
-      )} */}
 
       <input
-        type="text"
-        name="city"
+        type='text'
+        name='city'
         value={formData.city}
         onChange={handleInputChange}
-        placeholder="City"
+        placeholder='City'
       />
 
       <input
-        type="text"
-        name="postalCode"
+        type='text'
+        name='postalCode'
         value={formData.postalCode}
         onChange={handleInputChange}
-        placeholder="Postal Code"
+        placeholder='Postal Code'
       />
-      {/* {errors.postalCode && (
-        <div className="error-message">{errors.postalCode}</div>
-      )} */}
 
-      <button className='button' onClick={handleSubmit} disabled={isButtonDisabled}>
+      <button
+        className='button'
+        onClick={handleSubmit}
+        disabled={isButtonDisabled}
+      >
         Save
       </button>
+      <ToastContainer />
     </div>
   );
 };
