@@ -83,7 +83,7 @@ export const validateRegistrationForm = (formData) => {
   }
 
   // Validate postal code
-  const postalCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
+  const postalCodeRegex = /^[0-9]{5}$/;
   if (!postalCodeRegex.test(formData.postalCode.trim())) {
     const error = 'Invalid postal code';
     errors.postalCode = error;

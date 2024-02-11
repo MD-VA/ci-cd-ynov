@@ -1,19 +1,3 @@
-// // App.test.js
-// import React from 'react';
-// import { render } from '@testing-library/react';
-// import App from './App';
-
-// describe('App', () => {
-//   it('renders without crashing', () => {
-//     render(<App />);
-//   });
-
-//   it('renders RegistrationForm component', () => {
-//     const { getByPlaceholderText } = render(<App />);
-//     const firstNameInput = getByPlaceholderText('First Name');
-    
-//     expect(firstNameInput).toBeInTheDocument();
-//   });// App.test.js
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
