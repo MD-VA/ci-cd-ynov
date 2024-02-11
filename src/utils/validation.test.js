@@ -91,7 +91,7 @@ describe('Validation Functions Tests', () => {
       lastName: 'Doe',
       email: 'john.doe@example.com',
       dateOfBirth: '1990-01-01',
-      city: '  Paris  ',
+      city: 'Paris',
       postalCode: '75001',
     };
     const validationResult = validateRegistrationForm(formData);
@@ -114,4 +114,86 @@ describe('Validation Functions Tests', () => {
       city: 'City should not be a number',
     });
   });
+
+  test('validateRegistrationForm firstname and lastname if they were numbers', () => {
+    const formData = {
+      firstName: '2323',
+      lastName: 'Doe2323',
+      email: 'john.doe@example.com',
+      dateOfBirth: '1990-01-01',
+      city: 'Paris', // City is a number
+      postalCode: '75001',
+    };
+    const validationResult = validateRegistrationForm(formData);
+    expect(validationResult.isValid).toBe(false);
+    expect(validationResult.errors).toEqual({
+      firstName: 'Invalid first name',
+      lastName: 'Invalid last name',
+    });
+  });
+
+  test('validateRegistrationForm lastname should be invalid contains special catacter', () => {
+    const formData = {
+      firstName: 'Fran-l',
+      lastName: 'Do@e',
+      email: 'john.doe@example.com',
+      dateOfBirth: '1990-01-01',
+      city: 'Paris', // City is a number
+      postalCode: '75001',
+    };
+    const validationResult = validateRegistrationForm(formData);
+    expect(validationResult.isValid).toBe(false);
+    expect(validationResult.errors).toEqual({
+      lastName: 'Invalid last name',
+    });
+  });
+
+  test('validateRegistrationForm firstname and lastname valid names with accents, hyphens, and apostrophes', () => {
+    const formData = {
+      firstName: 'Jean-Paul',
+      lastName: 'L\'Éclair',
+      email: 'jean.paul@example.com',
+      dateOfBirth: '1990-01-01',
+      city: 'Paris',
+      postalCode: '75001',
+    };
+    const validationResult = validateRegistrationForm(formData);
+    expect(validationResult.isValid).toBe(true);
+    expect(validationResult.errors).toEqual({});
+  });
+
+  test('validateRegistrationForm firstname and lastname invalid names with special characters and numbers', () => {
+    const formData = {
+      firstName: 'Alice@123',
+      lastName: 'Smith#',
+      email: 'alice.smith@example.com',
+      dateOfBirth: '1990-01-01',
+      city: 'Paris',
+      postalCode: '75001',
+    };
+    const validationResult = validateRegistrationForm(formData);
+    expect(validationResult.isValid).toBe(false);
+    expect(validationResult.errors).toEqual({
+      firstName: 'Invalid first name',
+      lastName: 'Invalid last name',
+    });
+  });
+
+  test('validateRegistrationForm firstname and lastname empty strings', () => {
+    const formData = {
+      firstName: '',
+      lastName: '',
+      email: 'john.doe@example.com',
+      dateOfBirth: '1990-01-01',
+      city: 'Paris',
+      postalCode: '75001',
+    };
+    const validationResult = validateRegistrationForm(formData);
+    expect(validationResult.isValid).toBe(false);
+    expect(validationResult.errors).toEqual({
+      firstName: 'Invalid first name',
+      lastName: 'Invalid last name',
+    });
+  });
+
 });

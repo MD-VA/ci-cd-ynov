@@ -34,14 +34,14 @@ export const validateRegistrationForm = (formData) => {
   const errors = {};
 
   // Validate first name
-  if (!/^[a-zA-ZÀ-ÿ-]+$/.test(formData.firstName.trim())) {
+  if (!/^[a-zA-ZÀ-ÿ-'’]+$/.test(formData.firstName.trim())) {
     const error = 'Invalid first name';
     errors.firstName = error;
     displayErrorToast(error);
   }
 
   // Validate last name
-  if (!/^[a-zA-ZÀ-ÿ-]+$/.test(formData.lastName.trim())) {
+  if (!/^[a-zA-ZÀ-ÿ-'’]+$/.test(formData.lastName.trim())) {
     const error = 'Invalid last name';
     errors.lastName = error;
     displayErrorToast(error);
