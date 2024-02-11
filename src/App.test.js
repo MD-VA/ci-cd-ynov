@@ -24,26 +24,18 @@ jest.mock('react-toastify', () => ({
 }));
 
 describe('App Component Tests', () => {
-  // Test 1: Renders the App component
   test('Renders the App component', () => {
     render(<App />);
     const appElement = screen.getByTestId('app-component');
     expect(appElement).toBeInTheDocument();
   });
 
-  // Test 2: Renders the RegistrationForm component
   test('Renders the RegistrationForm component', () => {
     render(<App />);
     const registrationFormElement = screen.getByTestId('registration-form-component');
     expect(registrationFormElement).toBeInTheDocument();
   });
 
-  // Test 3: Renders the ToastContainer component
-  test('Renders the ToastContainer component', () => {
-    render(<App />);
-    const toastContainerElement = screen.queryByText('ToastContainer');
-  });
 });
 
 
-// });

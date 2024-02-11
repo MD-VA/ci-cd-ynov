@@ -1,7 +1,5 @@
-// validation.test.js
-import { calculateAge, validateRegistrationForm, displayErrorToast } from '../utils/validation';
+import { validateRegistrationForm, displayErrorToast } from '../utils/validation';
 
-// Mocking the toast.error function
 jest.mock('react-toastify', () => ({
   toast: {
     error: jest.fn(),
@@ -9,13 +7,7 @@ jest.mock('react-toastify', () => ({
 }));
 
 describe('Validation Functions Tests', () => {
-  // Test calculateAge function
-  test('calculateAge returns the correct age', () => {
-    const today = new Date();
-    const birthDate = new Date(today.getFullYear() - 20, today.getMonth(), today.getDate());
-    const age = calculateAge(birthDate.toISOString().split('T')[0]);
-    expect(age).toBe(20);
-  });
+
 
   // Test displayErrorToast function
   test('displayErrorToast calls toast.error with the correct parameters', () => {
@@ -39,7 +31,7 @@ describe('Validation Functions Tests', () => {
       lastName: 'Doe',
       email: 'john.doe@example.com',
       dateOfBirth: '1990-01-01',
-      city: 'New York',
+      city: 'Paris',
       postalCode: '10001',
     };
     const validationResult = validateRegistrationForm(formData);
@@ -85,6 +77,7 @@ describe('Validation Functions Tests', () => {
     expect(validationResult.errors).toEqual({
         firstName: 'Invalid first name',
         lastName: 'Invalid last name',
+        dateOfBirth: 'Date is required',
         email: 'Invalid email address',
         city: 'City is required',
         postalCode: 'Invalid postal code'
@@ -98,8 +91,8 @@ describe('Validation Functions Tests', () => {
       lastName: 'Doe',
       email: 'john.doe@example.com',
       dateOfBirth: '1990-01-01',
-      city: '  New York  ',
-      postalCode: '10001',
+      city: '  Paris  ',
+      postalCode: '75001',
     };
     const validationResult = validateRegistrationForm(formData);
     expect(validationResult.isValid).toBe(true);
@@ -113,7 +106,7 @@ describe('Validation Functions Tests', () => {
       email: 'john.doe@example.com',
       dateOfBirth: '1990-01-01',
       city: '123', // City is a number
-      postalCode: '10001',
+      postalCode: '75001',
     };
     const validationResult = validateRegistrationForm(formData);
     expect(validationResult.isValid).toBe(false);

@@ -1,24 +1,5 @@
 import { toast } from 'react-toastify';
-
-/**
- * Calculate the age based on the provided date of birth.
- *
- * @param {string} dateOfBirth - The date of birth in string format (YYYY-MM-DD).
- * @returns {number} The calculated age.
- */
-export const calculateAge = (dateOfBirth) => {
-  const today = new Date();
-  const birthDate = new Date(dateOfBirth);
-  const age = today.getFullYear() - birthDate.getFullYear();
-  const monthDiff = today.getMonth() - birthDate.getMonth();
-
-  // Adjust age based on the birthdate month and day
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-    return age - 1;
-  }
-
-  return age;
-};
+import { calculateAge } from '../module';
 
 /**
  * Display an error toast using react-toastify.
@@ -75,7 +56,15 @@ export const validateRegistrationForm = (formData) => {
   }
 
   // Validate date of birth
-  const age = calculateAge(formData.dateOfBirth);
+  let age;
+
+  try {
+    age = calculateAge(formData.dateOfBirth);
+  } catch (error) {
+    const err = 'Date is required';
+    errors.dateOfBirth = err;
+    displayErrorToast(err);
+  }
   if (age < 18) {
     const error = 'Must be at least 18 years old';
     errors.dateOfBirth = error;
