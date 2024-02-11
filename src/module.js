@@ -4,16 +4,18 @@
  * @param {object} p An object representing a person, implementing a birth Date parameter.
  * @return {number} The age in years of p.
  */
-export function calculateAge(p) {
-    if(!p) {
+export const calculateAge = (p) => {
+    if (!p) {
         throw new Error("missing param p")
     }
-    let dateDiff = new Date(Date.now() - p.birth.getTime())
-    let age = Math.abs(dateDiff.getUTCFullYear() - 1970);
+    const today = new Date();
+    const birthDate = new Date(p);
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+  
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      return age - 1;
+    }
     return age;
-}
-
-// let loise = {
-//     birth: new Date("11/07/1991")
-// }
-// console.log(calculateAge(loise))
+  };
+  
