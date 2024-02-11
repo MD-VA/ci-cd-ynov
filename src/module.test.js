@@ -26,12 +26,12 @@ describe('calculateAge Unit Test Suites', () => {
 
   it('should return age - 1 when monthDiff is negative', () => {
     const futureDate = new Date();
-    futureDate.setMonth(futureDate.getMonth() + 1); // Set a date one month in the future
-    expect(calculateAge(futureDate)).toEqual(-1); // Since monthDiff is negative, age should be 0
+    futureDate.setMonth(futureDate.getMonth() + 1); 
+    expect(calculateAge(futureDate)).toEqual(-1); 
   });
 
   it('should return age 0', () => {
     const birthDate = new Date();
-    expect(calculateAge(birthDate)).toEqual(0); // Since monthDiff is 0 and today.getDate() < birthDate.getDate(), age should be 19
+    expect(calculateAge(birthDate)).toEqual(0);
   });
 });
