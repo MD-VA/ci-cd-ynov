@@ -108,4 +108,29 @@ test('Displays error toaster and corresponding errors in red', async  () => {
 
 });
 
+test('Check if success toast is displayed',async () => {
+  render(<RegistrationForm />);
+  const saveButton = screen.getByText('Save');
+
+  fireEvent.change(screen.getByPlaceholderText('First Name'), { target: { value: 'John' } });
+  fireEvent.change(screen.getByPlaceholderText('Last Name'), { target: { value: 'Doe' } });
+  fireEvent.change(screen.getByPlaceholderText('Email'), { target: { value: 'john.doe@example.com' } });
+  fireEvent.change(screen.getByPlaceholderText('Date of Birth'), { target: { value: '1990-01-01' } });
+  fireEvent.change(screen.getByPlaceholderText('City'), { target: { value: 'Paris' } });
+  fireEvent.change(screen.getByPlaceholderText('Postal Code'), { target: { value: '08000' } });
+  fireEvent.click(saveButton);
+
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  expect(screen.getByText('Registration successful!')).toBeInTheDocument();
+
+
+  expect(screen.getByPlaceholderText('First Name').value).toBe('');
+  expect(screen.getByPlaceholderText('Last Name').value).toBe('');
+  expect(screen.getByPlaceholderText('Email').value).toBe('');
+  expect(screen.getByPlaceholderText('Date of Birth').value).toBe('');
+  expect(screen.getByPlaceholderText('City').value).toBe('');
+  expect(screen.getByPlaceholderText('Postal Code').value).toBe('');
+});
+
 });

@@ -1,9 +1,10 @@
 // src/components/RegistrationForm.js
 import React, { useState, useEffect } from 'react';
-import { validateRegistrationForm, calculateAge } from '../utils/validation';
+import { validateRegistrationForm } from '../utils/validation';
 import './RegistrationForm.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +25,18 @@ const RegistrationForm = () => {
     setErrors({ ...errors, [name]: '' });
   };
 
+  const displayToast = (message) => {
+    toast.success(message, {
+      position: 'bottom',
+      autoClose: 3000, // Auto close the toast after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   const handleSubmit = () => {
     const validationResult = validateRegistrationForm(formData);
     if (validationResult.isValid) {
@@ -37,6 +50,7 @@ const RegistrationForm = () => {
         postalCode: '',
       });
       // Show success toaster
+      displayToast('Registration successful!');
       setErrors({});
     } else {
       setErrors(validationResult.errors);
