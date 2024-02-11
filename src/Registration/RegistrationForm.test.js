@@ -124,7 +124,6 @@ test('Check if success toast is displayed',async () => {
 
   expect(screen.getByText('Registration successful!')).toBeInTheDocument();
 
-
   expect(screen.getByPlaceholderText('First Name').value).toBe('');
   expect(screen.getByPlaceholderText('Last Name').value).toBe('');
   expect(screen.getByPlaceholderText('Email').value).toBe('');
