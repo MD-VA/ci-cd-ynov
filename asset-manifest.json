@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "./app.js/static/css/main.cc11914d.css",
-    "main.js": "./app.js/static/js/main.e803f00b.js",
-    "static/js/787.ac61b555.chunk.js": "./app.js/static/js/787.ac61b555.chunk.js",
-    "index.html": "./app.js/index.html",
-    "main.cc11914d.css.map": "./app.js/static/css/main.cc11914d.css.map",
-    "main.e803f00b.js.map": "./app.js/static/js/main.e803f00b.js.map",
-    "787.ac61b555.chunk.js.map": "./app.js/static/js/787.ac61b555.chunk.js.map"
+    "main.css": "/ci-cd-ynov/index.js/static/css/main.cc11914d.css",
+    "main.js": "/ci-cd-ynov/index.js/static/js/main.e66a2f27.js",
+    "static/js/787.ac61b555.chunk.js": "/ci-cd-ynov/index.js/static/js/787.ac61b555.chunk.js",
+    "index.html": "/ci-cd-ynov/index.js/index.html",
+    "main.cc11914d.css.map": "/ci-cd-ynov/index.js/static/css/main.cc11914d.css.map",
+    "main.e66a2f27.js.map": "/ci-cd-ynov/index.js/static/js/main.e66a2f27.js.map",
+    "787.ac61b555.chunk.js.map": "/ci-cd-ynov/index.js/static/js/787.ac61b555.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cc11914d.css",
-    "static/js/main.e803f00b.js"
+    "static/js/main.e66a2f27.js"
   ]
 }
