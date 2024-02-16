@@ -21,7 +21,7 @@
     "coverage": "react-scripts test --coverage --watchAll",
     "test": "react-scripts test  --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/reportWebVitals.js --collectCoverageFrom=!src/index.js src/",
     "eject": "react-scripts eject",
-    "jsdoc": "jsdoc -c ./jsdoc.config.json -r -d ./docs",
+    "jsdoc": "jsdoc -c ./jsdoc.config.json -r -d ./public/docs",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
