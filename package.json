@@ -13,7 +13,7 @@
     "react-toastify": "^7.0.4",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://md-va.github.io/ci-cd-ynov/index.js",
+  "homepage": "https://md-va.github.io/ci-cd-ynov/app.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
