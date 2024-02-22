@@ -75,7 +75,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.build_test.outputs.pages_url }}
+      url: ${{ steps.deployment.outputs.pages_url }}
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -83,7 +83,8 @@ jobs:
     needs: update_version_and_readme
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v2
         with:
           # ... (existing configuration)
-          version: ${{ needs.build_test.outputs.version }}
+          version: ${{ needs.deployment.outputs.version }}
