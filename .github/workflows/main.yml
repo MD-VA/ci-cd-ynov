@@ -1,90 +1,72 @@
-name: Build, Test, Version, and Deploy React Application
+name: Build, Test and Deploy React Application
 
+# Controls when the action will run.
 on:
+# Triggers the workflow on push or pull request events but only  for the main branch
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallele
 jobs:
   build_test:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         node-version: [21.x]
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: npm ci, build, and test
+      - name: npm ci, build and test
         run: |
           npm ci
           npm run build --if-present
-          npm test
-
+          npm test  
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Set version
-        id: set_version
-        run: |
-          version="v${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}"
-          echo "Version: $version"
-          echo "::set-output name=version::$version"  # Set the version as an output
-
-      - name: Update README with version
-        run: |
-          echo "Current Version: ${{ steps.set_version.outputs.version }}" >> README.md
-          echo "Previous Version: ${{ steps.previous_version.outputs.previous_version }}" >> README.md  # Assuming previous_version is set in the update_version_and_readme job
-
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: build  # Ensure this matches the directory containing the artifacts
-          if-no-files-found: error
-          name: build  # Ensure this matches the name of the artifact
-          version: ${{ steps.set_version.outputs.version }}
-
-  update_version_and_readme:
-    runs-on: ubuntu-latest
-    needs: build_test
-    steps:
-      - name: Download previous artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: build
+          # Upload entire repository
           path: build
-
-      - name: Set previous version
-        id: set_previous_version
+          if-no-files-found: error
+      - name: Update tag version
         run: |
-          echo "Previous Version: $(cat build/version.txt)"
-          echo "::set-output name=previous_version::$(cat build/version.txt)"  # Set the previous version as an output
+          git config --global user.email "md.anouchpro@gmail.com"
+          git config --global user.name "MD-VA"
+          git tag 0.1.0-${{github.run_id}}${{github.run_number}}${{github.run_attempt}} -a -m "build alpha ${{github.run_number}}"
+          npm version from-git
 
+  # Deploy job
   deploy:
+    # Deploy to the github-pages environment
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.pages_url }}
+      url: ${{steps.deployment.outputs.page_url}}
     runs-on: ubuntu-latest
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      pages: write
-      id-token: write
-    needs: update_version_and_readme
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    
+    # Add a dependency to the build job
+    needs: build_test
+    # Specify runner + deployment step
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-        with:
-          # ... (existing configuration)
-          version: ${{ needs.deployment.outputs.version }}
