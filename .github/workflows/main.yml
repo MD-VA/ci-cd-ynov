@@ -33,15 +33,6 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v3
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          # Upload entire repository
-          path: build
-          if-no-files-found: error
       - name: Update tag version
         run: |
           git config --global user.email "md.anouchpro@gmail.com"
@@ -59,6 +50,15 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          # Upload entire repository
+          path: build
+          if-no-files-found: error
 
   # Deploy job
   deploy:
