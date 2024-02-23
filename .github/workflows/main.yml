@@ -46,7 +46,7 @@ jobs:
           npm run jsdoc
           npm run build --if-present
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
