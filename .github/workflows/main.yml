@@ -49,6 +49,17 @@ jobs:
           git config --global user.name "MD-VA"
           git tag 0.1.0-${{github.run_id}}${{github.run_number}}${{github.run_attempt}} -a -m "build alpha ${{github.run_number}}"
           npm version from-git
+          echo $(npm version from-git)
+          git commit -a -m "new version ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}"
+      - name: Build and docs
+        run: |
+          npm run jsdoc
+          npm run build --if-present
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
   # Deploy job
   deploy:
