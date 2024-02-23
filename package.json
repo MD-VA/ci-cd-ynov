@@ -1,6 +1,6 @@
 {
   "name": "ci-cd-ynov",
-  "version": "0.1.1",
+  "version": "0.1.2-8020029519-35-2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
